@@ -7,48 +7,46 @@ export default function HomePage() {
   return (
     <main>
       <section className="py-20">
-      <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
-      <div className="w-full space-y-6 text-center flex-col items-center justify-center p-4 bg-gray-50">
-        <h1 className="text-4xl font-bold tracking-tight">Car Checker</h1>
-        <p className="text-gray-500">Enter a UK vehicle registration number to get detailed information.</p>
-        <SearchForm />
-        </div>
-      </div>
-
-      </section>
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-            <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
-              <h1 className="text-4xl font-bold text-gray-900 tracking-tight sm:text-5xl md:text-6xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-4">
+            <div className="text-center lg:text-left lg:col-span-2">
+              <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl">
                 Buying a Car?
                 <span className="block text-orange-500">Check it first</span>
               </h1>
-              <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                Launch your SaaS product in record time with our powerful,
-                ready-to-use template. Packed with modern technologies and
-                essential integrations.
+              <p className="mt-3 text-gray-500">
+                Enter your registration
               </p>
-              <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
-                <a
-                  href="https://vercel.com/templates/next.js/next-js-saas-starter"
-                  target="_blank"
-                >
-                  <Button className="bg-white hover:bg-gray-100 text-black border border-gray-200 rounded-full text-lg px-8 py-4 inline-flex items-center justify-center">
-                    Deploy your own
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </a>
-              </div>
             </div>
-            <div className="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
-            <SearchForm />
+            <div className="mt-12 lg:mt-0 lg:col-span-2">
+              <SearchForm />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-white w-full">
+      <section className="py-20">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl">
+                Buying a Car?
+                <span className="block text-orange-500">Check it first</span>
+              </h1>
+              <p className="mt-3 text-gray-500">
+                Enter your registration
+              </p>
+            </div>
+            <div className="mt-10 lg:w-1/2 lg:mx-auto">
+              <SearchForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+
+      {/* <section className="py-16 bg-white w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-3 lg:gap-8">
             <div>
@@ -102,9 +100,9 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      
+
     </main>
   );
 }
