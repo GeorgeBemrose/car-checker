@@ -1,0 +1,14 @@
+import { SearchForm } from '@/components/search-form'
+
+export default function HomePage() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center p-4 bg-gray-50">
+      <div className="w-full max-w-md space-y-6 text-center">
+        <h1 className="text-4xl font-bold tracking-tight">Car Checker</h1>
+        <p className="text-gray-500">Enter a UK vehicle registration number to get detailed information.</p>
+        <SearchForm />
+      </div>
+    </main>
+  )
+}
+
