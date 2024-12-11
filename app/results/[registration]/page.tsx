@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation'
 import { VehicleDetails } from '@/components/vehicle-details'
 import { RegistrationNotFound } from '@/components/registration-not-found'
 
@@ -12,7 +11,6 @@ interface VehicleData {
   registrationDate: string
   manufactureDate: string
   engineSize: string
-  hasOutstandingRecall: string
   motTests: MotTest[]
 }
 
@@ -22,10 +20,7 @@ interface MotTest {
   expiryDate: string
   odometerValue: string
   odometerUnit: string
-  odometerResultType: string
   motTestNumber: string
-  dataSource: string
-  location?: string
   defects?: Defect[]
 }
 
@@ -36,77 +31,45 @@ interface Defect {
 }
 
 async function getVehicleData(registration: string): Promise<VehicleData | null> {
-  // This is where you would make the actual API call
-  // For demonstration purposes, we'll return null for a specific registration
-  if (registration === 'NOT1FOUND') {
-    return null;
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/vehicle/${registration}`, { cache: 'no-store' })
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      return null
+    }
+    throw new Error('Failed to fetch vehicle data')
   }
 
-  // Mock data for other registrations
+  const data = await response.json()
+
+  // Transform the API response to match our VehicleData interface
   return {
-    registration: registration,
-    make: "Ford",
-    model: "Focus",
-    firstUsedDate: "2020-01-01",
-    fuelType: "Petrol",
-    primaryColour: "Silver",
-    registrationDate: "2020-01-01",
-    manufactureDate: "2019-12-01",
-    engineSize: "1598",
-    hasOutstandingRecall: "No",
-    motTests: [
-      {
-        completedDate: "2023-02-17T09:17:46.000Z",
-        testResult: "PASSED",
-        expiryDate: "2024-02-16",
-        odometerValue: "30000",
-        odometerUnit: "MI",
-        odometerResultType: "READ",
-        motTestNumber: "12345678",
-        dataSource: "DVSA",
-        defects: [
-          {
-            text: "Windscreen wiper blade deteriorated",
-            type: "ADVISORY",
-            dangerous: false
-          }
-        ]
-      },
-      {
-        completedDate: "2022-02-15T10:30:00.000Z",
-        testResult: "PASSED",
-        expiryDate: "2023-02-14",
-        odometerValue: "15000",
-        odometerUnit: "MI",
-        odometerResultType: "READ",
-        motTestNumber: "87654321",
-        dataSource: "DVSA"
-      },
-      {
-        completedDate: "2021-02-10T11:45:00.000Z",
-        testResult: "PASSED",
-        expiryDate: "2022-02-09",
-        odometerValue: "5000",
-        odometerUnit: "MI",
-        odometerResultType: "READ",
-        motTestNumber: "11223344",
-        dataSource: "DVSA"
-      }
-    ]
+    registration: data.registration,
+    make: data.make,
+    model: data.model,
+    firstUsedDate: data.firstUsedDate,
+    fuelType: data.fuelType,
+    primaryColour: data.primaryColour,
+    registrationDate: data.registrationDate,
+    manufactureDate: data.manufactureDate,
+    engineSize: data.engineSize,
+    motTests: data.motTests 
   }
 }
 
-export default async function ResultsPage({
-  params
-}: {
-  params: { registration: string }
-}) {
-  const data = await getVehicleData(params.registration)
+export default async function ResultsPage({ params }: { params: { registration: string } }) {
+  const { registration } = await params;
 
-  if (!data) {
-    return <RegistrationNotFound registration={params.registration} />
+  try {
+    const data = await getVehicleData(registration);
+
+    if (!data) {
+      return <RegistrationNotFound registration={registration} />;
+    }
+
+    return <VehicleDetails vehicle={data} />;
+  } catch (error) {
+    return <RegistrationNotFound registration={registration} />;
   }
-
-  return <VehicleDetails vehicle={data} />
 }
 

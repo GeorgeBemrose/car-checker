@@ -19,8 +19,8 @@ export function SearchForm() {
 
   return (
     <Card>
-      <CardContent className="pt-6">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <CardContent className="pt-6 grid grid-cols-3">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 col-span-3 px-">
           <Input
             type="text"
             placeholder="Enter registration (e.g. ABC1234)"

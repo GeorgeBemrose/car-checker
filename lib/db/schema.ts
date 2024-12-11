@@ -8,6 +8,12 @@ import {
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
+export const govApiTokens = pgTable('gov_api_token', {
+  id: serial('id').primaryKey(),
+  token: text('token').notNull(),
+  expiresAt: timestamp('expires_at').notNull(),
+});
+
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 100 }),

@@ -6,43 +6,25 @@ import { SearchForm } from '@/components/search-form';
 export default function HomePage() {
   return (
     <main>
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-10 pb-20"> {/* A - Prefered by Sas and Gab */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-6 max-w-7xl">
           <div className="grid lg:grid-cols-4">
-            <div className="text-center lg:text-left lg:col-span-2">
+            <div className="text-center lg:text-left lg:col-span-2 md:pr-10">
               <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl">
                 Buying a Car?
                 <span className="block text-orange-500">Check it first</span>
               </h1>
               <p className="mt-3 text-gray-500">
-                Enter your registration
+                Enter your registration  Enter your registration  Enter your registration  Enter your registration  Enter your registration
               </p>
             </div>
-            <div className="mt-12 lg:mt-0 lg:col-span-2">
+            <div className="mt-12 lg:mt-0 lg:col-span-2 md:pt-10">
               <SearchForm />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl">
-                Buying a Car?
-                <span className="block text-orange-500">Check it first</span>
-              </h1>
-              <p className="mt-3 text-gray-500">
-                Enter your registration
-              </p>
-            </div>
-            <div className="mt-10 lg:w-1/2 lg:mx-auto">
-              <SearchForm />
-            </div>
-          </div>
-        </div>
-      </section>
 
       
 
@@ -60,7 +42,7 @@ export default function HomePage() {
               </div>
               <div className="mt-5">
                 <h2 className="text-lg font-medium text-gray-900">
-                  Next.js and React
+                  Quick and Easy
                 </h2>
                 <p className="mt-2 text-base text-gray-500">
                   Leverage the power of modern web technologies for optimal

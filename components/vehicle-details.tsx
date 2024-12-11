@@ -18,17 +18,13 @@ interface VehicleDetailsProps {
     registrationDate: string
     manufactureDate: string
     engineSize: string
-    hasOutstandingRecall: string
     motTests: Array<{
       completedDate: string
       testResult: string
       expiryDate: string
       odometerValue: string
       odometerUnit: string
-      odometerResultType: string
       motTestNumber: string
-      dataSource: string
-      location?: string
       defects?: Array<{
         text: string
         type: string
@@ -81,32 +77,43 @@ export function VehicleDetails({ vehicle }: VehicleDetailsProps) {
                 <p className="font-medium">{vehicle.engineSize}cc</p>
               </div>
               <div className="space-y-1">
-                <p className="text-sm text-gray-500">Outstanding Recall</p>
-                <p className="font-medium">{vehicle.hasOutstandingRecall}</p>
+                <p className="text-sm text-gray-500">Year of Manufacture</p>
+                <p className="font-medium">{vehicle.manufactureDate}</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Tabs defaultValue="graph" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="graph">Mileage Graph</TabsTrigger>
-            <TabsTrigger value="history">MOT History</TabsTrigger>
-          </TabsList>
-          <TabsContent value="graph">
-            <Card>
-              <CardHeader>
-                <CardTitle>Mileage History</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <MileageGraph motTests={vehicle.motTests} />
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="history">
-            <MotHistoryList motTests={vehicle.motTests} />
-          </TabsContent>
-        </Tabs>
+        {vehicle.motTests.length > 0 ? (
+          <Tabs defaultValue="graph" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="graph">Mileage Graph</TabsTrigger>
+              <TabsTrigger value="history">MOT History</TabsTrigger>
+            </TabsList>
+            <TabsContent value="graph">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Mileage History</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <MileageGraph motTests={vehicle.motTests} />
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="history">
+              <MotHistoryList motTests={vehicle.motTests} />
+            </TabsContent>
+          </Tabs>
+        ) : (
+          <Card>
+            <CardHeader>
+              <CardTitle>MOT History</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>No MOT history is available for this vehicle.</p>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </main>
   )
