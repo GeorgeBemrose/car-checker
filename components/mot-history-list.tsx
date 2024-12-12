@@ -36,10 +36,7 @@ export function MotHistoryList({ motTests }: MotHistoryListProps) {
           </CardHeader>
           <CardContent>
             <dl className="grid sm:grid-cols-3 gap-2 text-sm">
-              <div>
-                <dt className="font-medium">Expiry Date</dt>
-                <dd>{new Date(test.expiryDate).toLocaleDateString()}</dd>
-              </div>
+              
               <div>
                 <dt className="font-medium">Mileage</dt>
                 <dd>{`${test.odometerValue} ${test.odometerUnit}`}</dd>
@@ -48,6 +45,10 @@ export function MotHistoryList({ motTests }: MotHistoryListProps) {
                 <dt className="font-medium">MOT Test Number</dt>
                 <dd>{test.motTestNumber}</dd>
               </div>
+              {test.testResult === "PASSED" ? <div>
+                <dt className="font-medium">Expiry Date</dt>
+                <dd>{new Date(test.expiryDate).toLocaleDateString()}</dd>
+              </div> : ""}
             </dl>
             {test.defects && test.defects.length > 0 && (
               <div className="mt-4">

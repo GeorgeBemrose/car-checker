@@ -24,7 +24,7 @@ async function fetchNewToken(): Promise<TokenResponse> {
   if (!response.ok) {
     throw new Error('Failed to fetch token')
   }
-  console.log('token: '+ response)
+
   const data: TokenResponse = await response.json()
   return data
 }

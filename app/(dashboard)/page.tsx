@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, CreditCard, Database } from 'lucide-react';
 import { Terminal } from './terminal';
 import { SearchForm } from '@/components/search-form';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+
 
 export default function HomePage() {
   return (
@@ -25,7 +27,23 @@ export default function HomePage() {
         </div>
       </section>
 
-
+      <div className="mt-12 text-center">
+          <h2 className="text-2xl font-semibold mb-4">Why Use Our Vehicle Checker?</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            <FeatureCard 
+              title="Instant Results" 
+              description="Get comprehensive vehicle information in seconds."
+            />
+            <FeatureCard 
+              title="Official Data" 
+              description="We use the latest data from the DVLA database."
+            />
+            <FeatureCard 
+              title="Easy to Use" 
+              description="Simple interface for quick and efficient checks."
+            />
+          </div>
+        </div>
       
 
       {/* <section className="py-16 bg-white w-full">
@@ -87,4 +105,17 @@ export default function HomePage() {
 
     </main>
   );
+}
+
+function FeatureCard({ title, description }: { title: string; description: string }) {
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p>{description}</p>
+      </CardContent>
+    </Card>
+  )
 }

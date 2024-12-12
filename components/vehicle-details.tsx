@@ -44,14 +44,10 @@ export function VehicleDetails({ vehicle }: VehicleDetailsProps) {
         
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Vehicle Information</CardTitle>
+            <CardTitle className="text-2xl">Vehicle Information - {vehicle.registration}</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-4">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-              <div className="space-y-1">
-                <p className="text-sm text-gray-500">Registration</p>
-                <p className="font-medium">{vehicle.registration}</p>
-              </div>
               <div className="space-y-1">
                 <p className="text-sm text-gray-500">Make</p>
                 <p className="font-medium">{vehicle.make}</p>
@@ -59,10 +55,6 @@ export function VehicleDetails({ vehicle }: VehicleDetailsProps) {
               <div className="space-y-1">
                 <p className="text-sm text-gray-500">Model</p>
                 <p className="font-medium">{vehicle.model}</p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-gray-500">First Used Date</p>
-                <p className="font-medium">{new Date(vehicle.firstUsedDate).toLocaleDateString()}</p>
               </div>
               <div className="space-y-1">
                 <p className="text-sm text-gray-500">Fuel Type</p>
@@ -77,8 +69,8 @@ export function VehicleDetails({ vehicle }: VehicleDetailsProps) {
                 <p className="font-medium">{vehicle.engineSize}cc</p>
               </div>
               <div className="space-y-1">
-                <p className="text-sm text-gray-500">Year of Manufacture</p>
-                <p className="font-medium">{vehicle.manufactureDate}</p>
+                <p className="text-sm text-gray-500">Registration Date</p>
+                <p className="font-medium">{new Date(vehicle.firstUsedDate).toLocaleDateString()}</p>
               </div>
             </div>
           </CardContent>
