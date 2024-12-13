@@ -29,7 +29,7 @@ export function MotHistoryList({ motTests }: MotHistoryListProps) {
           <CardHeader>
             <CardTitle className="text-lg flex justify-between items-center">
               <span>MOT Test - {new Date(test.completedDate).toLocaleDateString()}</span>
-              <Badge variant={test.testResult === "PASSED" ? "success" : "destructive"}>
+              <Badge variant={test.testResult === "PASSED" ? "default" : "destructive"}>
                 {test.testResult}
               </Badge>
             </CardTitle>
@@ -44,6 +44,7 @@ export function MotHistoryList({ motTests }: MotHistoryListProps) {
               <div>
                 <dt className="font-medium">MOT Test Number</dt>
                 <dd>{test.motTestNumber}</dd>
+        
               </div>
               {test.testResult === "PASSED" ? <div>
                 <dt className="font-medium">Expiry Date</dt>

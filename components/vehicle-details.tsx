@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { MileageGraph } from "@/components/mileage-graph"
 import { MotHistoryList } from "@/components/mot-history-list"
+import { NumberPlate } from './ui/number-plate'
 
 interface VehicleDetailsProps {
   vehicle: {
@@ -37,15 +38,19 @@ interface VehicleDetailsProps {
 export function VehicleDetails({ vehicle }: VehicleDetailsProps) {
   return (
     <main className="min-h-screen p-4 bg-gray-50">
-      <div className="max-w-4xl mx-auto space-y-6">
+      <div className="max-w-4xl mx-auto">
+
         <Button asChild variant="ghost" className="mb-6">
           <Link href="/">← Back to Search</Link>
         </Button>
-        
+    
         <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl">Vehicle Information - {vehicle.registration}</CardTitle>
+          <CardHeader className='flex justify-between flex-row'>
+            <CardTitle className="text-2xl">Vehicle Information</CardTitle>
+            <NumberPlate registration={'KM07 WRD'} className=''/>
+            {/* <NumberPlate registration={vehicle.registration} className=''/> */}
           </CardHeader>
+          
           <CardContent className="grid gap-4">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               <div className="space-y-1">
