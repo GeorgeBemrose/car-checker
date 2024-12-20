@@ -28,6 +28,7 @@ export function RegistrationNotFound({ registration, data }: RegistrationNotFoun
             <p className="mb-4">
               Please check the registration number and try again.
               {'data:'+ data}
+              {'Vercel URL:' + process.env.VERCEL_URL}
             </p>
             <Button asChild>
               <Link href="/">New Search</Link>
