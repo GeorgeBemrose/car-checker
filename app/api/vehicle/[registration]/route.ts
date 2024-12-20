@@ -23,7 +23,7 @@ async function getVehicleData(registration: string) {
     if (response.status === 404) {
       throw new Error('Vehicle not found')
     }
-    throw new Error('Failed to fetch vehicle data')
+    throw new Error('Failed to fetch vehicle data'+response.status)
   }
 
   return response.json()
