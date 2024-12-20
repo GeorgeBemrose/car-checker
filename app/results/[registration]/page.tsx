@@ -31,7 +31,8 @@ interface Defect {
 }
 
 async function getVehicleData(registration: string): Promise<VehicleData | null> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/vehicle/${registration}`, { cache: 'no-store' })
+  // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/vehicle/${registration}`, { cache: 'no-store' })
+  const response = await fetch(`${process.env.VERCEL_URL}/api/vehicle/${registration}`, { cache: 'no-store' })
   
   if (!response.ok) {
     if (response.status === 404) {
