@@ -11,14 +11,14 @@ async function getVehicleData(registration: string) {
   const token = await getValidToken()
 
   const response = await fetch(GOV_API_BASE_URL + registration, {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'X-API-Key': process.env.GOV_API_KEY!,
-            'Accept': 'application/json',
-          },
-        })
-  console.log(response)
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'X-API-Key': process.env.GOV_API_KEY!,
+      'Accept': 'application/json',
+    },
+  })
+
   if (!response.ok) {
     if (response.status === 404) {
       throw new Error('Vehicle not found')

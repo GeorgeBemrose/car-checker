@@ -32,7 +32,7 @@ interface Defect {
 
 async function getVehicleData(registration: string): Promise<VehicleData | null> {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/vehicle/${registration}`, { cache: 'no-store' })
-
+  
   if (!response.ok) {
     if (response.status === 404) {
       return null
@@ -68,7 +68,7 @@ export default async function ResultsPage({ params }: PageProps) {
 
   try {
     const data = await getVehicleData(registration);
-
+    console.log('data: ', data)
     if (!data) {
       return <RegistrationNotFound registration={registration} />;
     }
