@@ -70,12 +70,12 @@ export default async function ResultsPage({ params }: PageProps) {
     const data = await getVehicleData(registration);
     console.log('data: ', data)
     if (!data) {
-      return <RegistrationNotFound registration={registration} />;
+      return <RegistrationNotFound registration={registration} data={data}/>;
     }
 
     return <VehicleDetails vehicle={data} />;
   } catch (error) {
-    return <RegistrationNotFound registration={registration} />;
+    return <RegistrationNotFound registration={registration} data={'error'}/>;
   }
 }
 

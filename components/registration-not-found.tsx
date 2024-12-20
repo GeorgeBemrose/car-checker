@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 interface RegistrationNotFoundProps {
-  registration: string
+  registration: string,
+  data: string | null
 }
 
-export function RegistrationNotFound({ registration }: RegistrationNotFoundProps) {
+export function RegistrationNotFound({ registration, data }: RegistrationNotFoundProps) {
+  console.log('data: ', data)
   return (
     <main className="min-h-screen p-4 bg-gray-50">
       <div className="max-w-md mx-auto space-y-6">
@@ -25,6 +27,7 @@ export function RegistrationNotFound({ registration }: RegistrationNotFoundProps
             <p className="text-2xl font-bold mb-6">{registration}</p>
             <p className="mb-4">
               Please check the registration number and try again.
+              {'data:'+ data}
             </p>
             <Button asChild>
               <Link href="/">New Search</Link>
