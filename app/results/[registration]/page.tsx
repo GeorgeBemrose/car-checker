@@ -75,7 +75,7 @@ export default async function ResultsPage({ params }: PageProps) {
 
     return <VehicleDetails vehicle={data} />;
   } catch (error) {
-    return <RegistrationNotFound registration={registration} data={'error'}/>;
+    return <RegistrationNotFound registration={registration} data={(error as Error).message}/>;
   }
 }
 
