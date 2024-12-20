@@ -38,21 +38,31 @@ export function ImageCarousel({ images, autoPlayInterval = 5000 }: ImageCarousel
   }, [nextSlide, autoPlayInterval])
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto aspect-[16/9] max-h-[400px] group">
-      <div className="relative h-full w-full rounded-2xl bg-center bg-cover duration-500 overflow-hidden">
-        <Image
-          src={images[currentIndex].src}
-          alt={images[currentIndex].alt}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          style={{ objectFit: 'contain' }}
-          priority
-        />
+    <div className="relative w-full max-w-4xl mx-auto aspect-[16/9] max-h-[400px] overflow-hidden group">
+      {/* Slide Container with Smooth Transition */}
+      <div
+        className="flex transition-transform duration-700 ease-in-out"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {images.map((image, index) => (
+          <div key={index} className="flex-shrink-0 w-full aspect-[2.25/1] relative">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+            //   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              style={{ objectFit: 'contain' }}
+              priority
+            />
+          </div>
+        ))}
       </div>
+
+      {/* Navigation Buttons */}
       <Button
         variant="outline"
         size="icon"
-        className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 rounded-full p-2 bg-black/20 text-white cursor-pointer"
+        className="hidden group-hover:block absolute top-[50%] -translate-y-1/2 left-5 rounded-full p-2 bg-black/20 text-white cursor-pointer"
         onClick={prevSlide}
       >
         <ChevronLeft className="h-4 w-4" />
@@ -61,12 +71,14 @@ export function ImageCarousel({ images, autoPlayInterval = 5000 }: ImageCarousel
       <Button
         variant="outline"
         size="icon"
-        className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 rounded-full p-2 bg-black/20 text-white cursor-pointer"
+        className="hidden group-hover:block absolute top-[50%] -translate-y-1/2 right-5 rounded-full p-2 bg-black/20 text-white cursor-pointer"
         onClick={nextSlide}
       >
         <ChevronRight className="h-4 w-4" />
         <span className="sr-only">Next slide</span>
       </Button>
+
+      {/* Dots for Slide Navigation */}
       <div className="absolute bottom-4 left-0 right-0">
         <div className="flex items-center justify-center gap-2">
           {images.map((_, index) => (
@@ -75,7 +87,7 @@ export function ImageCarousel({ images, autoPlayInterval = 5000 }: ImageCarousel
               onClick={() => goToSlide(index)}
               className={`
                 transition-all w-3 h-3 bg-white rounded-full
-                ${currentIndex === index ? "p-2" : "bg-opacity-50"}
+                ${currentIndex === index ? "p-2 bg-opacity-100" : "bg-opacity-50"}
               `}
               aria-label={`Go to slide ${index + 1}`}
             />
@@ -85,4 +97,3 @@ export function ImageCarousel({ images, autoPlayInterval = 5000 }: ImageCarousel
     </div>
   )
 }
-

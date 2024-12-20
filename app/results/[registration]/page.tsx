@@ -57,8 +57,14 @@ async function getVehicleData(registration: string): Promise<VehicleData | null>
   }
 }
 
-export default async function ResultsPage({ params }: { params: { registration: string } }) {
-  const { registration } = await params;
+interface PageProps {
+  params: Promise<{
+    registration: string
+  }>
+}
+
+export default async function ResultsPage({ params }: PageProps) {
+  const { registration } =  await params;
 
   try {
     const data = await getVehicleData(registration);

@@ -39,7 +39,6 @@ export default function HomePage() {
               </h1>
               </div>
         <ImageCarousel images={carouselImages} />
-        
       </section>
       
 

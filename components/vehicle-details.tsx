@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { format } from 'date-fns'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -43,14 +44,14 @@ export function VehicleDetails({ vehicle }: VehicleDetailsProps) {
         <Button asChild variant="ghost" className="mb-6">
           <Link href="/">← Back to Search</Link>
         </Button>
-    
+
         <Card>
           <CardHeader className='flex justify-between flex-row'>
             <CardTitle className="text-2xl">Vehicle Information</CardTitle>
-            <NumberPlate registration={'KM07 WRD'} className=''/>
-            {/* <NumberPlate registration={vehicle.registration} className=''/> */}
+
+            <NumberPlate registration={vehicle.registration} className='' />
           </CardHeader>
-          
+
           <CardContent className="grid gap-4">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               <div className="space-y-1">
@@ -75,7 +76,10 @@ export function VehicleDetails({ vehicle }: VehicleDetailsProps) {
               </div>
               <div className="space-y-1">
                 <p className="text-sm text-gray-500">Registration Date</p>
-                <p className="font-medium">{new Date(vehicle.firstUsedDate).toLocaleDateString()}</p>
+                <p className="font-medium">
+                  {format(new Date(vehicle.firstUsedDate), 'dd/MM/yyyy')}
+                </p>
+
               </div>
             </div>
           </CardContent>
