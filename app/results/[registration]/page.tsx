@@ -37,12 +37,12 @@ async function getVehicleData(registration: string): Promise<VehicleData | null>
   const response = await fetch(`http://${process.env.VERCEL_URL}/api/vehicle/${registration}`, { cache: 'no-store' })
   // const response = await fetch(`/api/vehicle/${registration}`, { cache: 'no-store' })
   console.log('Vercel URL:', process.env.VERCEL_URL);
-  if (!response.ok) {
+  // if (!response.ok) {
     if (response.status === 404) {
       return null
     }
-    throw new Error('Failed to fetch vehicle data')
-  }
+  //   throw new Error('Failed to fetch vehicle data')
+  // }
 
   const data = await response.json()
 
