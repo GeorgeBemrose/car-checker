@@ -44,21 +44,32 @@ async function getVehicleData(registration: string): Promise<VehicleData | null>
   //   throw new Error('Failed to fetch vehicle data')
   // }
 
-  const data = await response.json()
-
-  // Transform the API response to match our VehicleData interface
-  return {
-    registration: data.registration,
-    make: data.make,
-    model: data.model,
-    firstUsedDate: data.firstUsedDate,
-    fuelType: data.fuelType,
-    primaryColour: data.primaryColour,
-    registrationDate: data.registrationDate,
-    manufactureDate: data.manufactureDate,
-    engineSize: data.engineSize,
-    motTests: data.motTests 
+  console.log('Response status:', response.status);
+  
+  // Check if the response is JSON
+  const contentType = response.headers.get('Content-Type');
+  if (contentType && contentType.includes('application/json')) {
+    const data = await response.json();
+    console.log('Fetched vehicle data:', data);
+    return {
+      registration: data.registration,
+      make: data.make,
+      model: data.model,
+      firstUsedDate: data.firstUsedDate,
+      fuelType: data.fuelType,
+      primaryColour: data.primaryColour,
+      registrationDate: data.registrationDate,
+      manufactureDate: data.manufactureDate,
+      engineSize: data.engineSize,
+      motTests: data.motTests
+    };
+  } else {
+    // Log the error if it's not JSON
+    const errorText = await response.text();
+    console.log('Error response body:', errorText);
+    throw new Error('Response is not JSON');
   }
+
 }
 
 interface PageProps {
