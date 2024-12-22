@@ -14,7 +14,7 @@ async function getVehicleData(registration: string) {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`,
-      'X-API-Key': process.env.GOV_API_KEY!,
+      'X-API-Key': process.env.GOV_API_KEY,
       'Accept': 'application/json',
     },
   })
