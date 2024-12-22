@@ -1,3 +1,5 @@
+
+
 import { VehicleDetails } from '@/components/vehicle-details'
 import { RegistrationNotFound } from '@/components/registration-not-found'
 
@@ -31,29 +33,35 @@ interface Defect {
 }
 
 async function getVehicleData(registration: string): Promise<VehicleData | null> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/vehicle/${registration}`, { cache: 'no-store' })
+  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` // Vercel (HTTPS)
+      : 'http://localhost:3000'; // Local (HTTP)
 
-  if (!response.ok) {
-    if (response.status === 404) {
-      return null
-    }
-    throw new Error('Failed to fetch vehicle data')
-  }
+  const apiUrl = `${baseUrl}/api/vehicle/${registration}`;
 
-  const data = await response.json()
+  try {
+      const response = await fetch(apiUrl, { cache: 'no-store' });
 
-  // Transform the API response to match our VehicleData interface
-  return {
-    registration: data.registration,
-    make: data.make,
-    model: data.model,
-    firstUsedDate: data.firstUsedDate,
-    fuelType: data.fuelType,
-    primaryColour: data.primaryColour,
-    registrationDate: data.registrationDate,
-    manufactureDate: data.manufactureDate,
-    engineSize: data.engineSize,
-    motTests: data.motTests 
+      if (!response.ok) {
+          if (response.status === 404) {
+              return null;
+          } else {
+              const errorText = await response.text();
+              throw new Error(`API request failed with status ${response.status}: ${errorText}`);
+          }
+      }
+
+      const contentType = response.headers.get('Content-Type');
+      if (!contentType || !contentType.includes('application/json')) {
+          const errorText = await response.text();
+          throw new Error(`Response is not JSON. Content-Type: ${contentType}, Body: ${errorText}`);
+      }
+
+      return await response.json();
+
+  } catch (error) {
+      console.error("Error in getVehicleData:", error);
+      throw error; // Re-throw for handling in the component
   }
 }
 
@@ -68,14 +76,13 @@ export default async function ResultsPage({ params }: PageProps) {
 
   try {
     const data = await getVehicleData(registration);
-
     if (!data) {
-      return <RegistrationNotFound registration={registration} />;
+      return <RegistrationNotFound registration={registration} data={data}/>;
     }
 
     return <VehicleDetails vehicle={data} />;
   } catch (error) {
-    return <RegistrationNotFound registration={registration} />;
+    return <RegistrationNotFound registration={registration} data={(error as Error).message}/>;
   }
 }
 
