@@ -8,7 +8,7 @@ interface RegistrationNotFoundProps {
 }
 
 export function RegistrationNotFound({ registration, data }: RegistrationNotFoundProps) {
-  console.log('data: ', data)
+
   return (
     <main className="min-h-screen p-4 bg-gray-50">
       <div className="max-w-md mx-auto space-y-6">

@@ -32,48 +32,6 @@ interface Defect {
   dangerous: boolean
 }
 
-// async function getVehicleData(registration: string): Promise<VehicleData | null> {
-//   // const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/vehicle/${registration}`, { cache: 'no-store' })
-//   const response = await fetch(`http://${process.env.VERCEL_URL}/api/vehicle/${registration}`, { cache: 'no-store' })
-//   // const response = await fetch(`/api/vehicle/${registration}`, { cache: 'no-store' });
-
-//   // const response = await fetch(`/api/vehicle/${registration}`, { cache: 'no-store' })
-//   console.log('Vercel URL:', process.env.VERCEL_URL);
-//   // if (!response.ok) {
-//     if (response.status === 404) {
-//       return null
-//     }
-//   //   throw new Error('Failed to fetch vehicle data')
-//   // }
-
-//   console.log('Response status:', response.status);
-  
-//   // Check if the response is JSON
-//   const contentType = response.headers.get('Content-Type');
-//   if (contentType && contentType.includes('application/json')) {
-//     const data = await response.json();
-//     console.log('Fetched vehicle data:', data);
-//     return {
-//       registration: data.registration,
-//       make: data.make,
-//       model: data.model,
-//       firstUsedDate: data.firstUsedDate,
-//       fuelType: data.fuelType,
-//       primaryColour: data.primaryColour,
-//       registrationDate: data.registrationDate,
-//       manufactureDate: data.manufactureDate,
-//       engineSize: data.engineSize,
-//       motTests: data.motTests
-//     };
-//   } else {
-//     // Log the error if it's not JSON
-//     const errorText = await response.text();
-//     console.log('Error response body:', errorText);
-//     throw new Error('Response is not JSON');
-//   }
-
-// }
-
 async function getVehicleData(registration: string): Promise<VehicleData | null> {
   const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` // Vercel (HTTPS)
@@ -118,7 +76,6 @@ export default async function ResultsPage({ params }: PageProps) {
 
   try {
     const data = await getVehicleData(registration);
-    console.log('data: ', data)
     if (!data) {
       return <RegistrationNotFound registration={registration} data={data}/>;
     }
