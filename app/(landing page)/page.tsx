@@ -22,8 +22,14 @@ export default function HomePage() {
                 <span className="block text-orange-500">Check it first</span>
               </h1>
               <p className="mt-3 text-gray-500">
-                Enter your registration  Enter your registration  Enter your registration  Enter your registration  Enter your registration
+                Enter your registration for a quick and easy check of the vehicle's history.
               </p>
+              <p className="mt-3 text-gray-500">
+                Our free vehicle checker provides you with valuable information about the car's mileage, MOT history, and more.
+              </p>
+              <p className="mt-3 text-gray-500">
+                Make informed decisions and reduced risks when buying a used car.
+                </p>
             </div>
             <div className="mt-12 lg:mt-0 lg:col-span-2 md:pt-10">
               <SearchForm />
