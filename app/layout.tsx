@@ -4,7 +4,7 @@ import { Manrope } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: 'Reg Lookup',
-  description: 'Get started quickly with Next.js, Postgres, and Stripe.',
+  description: "Check out your car's history (it's free!)",
 };
 
 export const viewport: Viewport = {
